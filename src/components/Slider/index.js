@@ -12,62 +12,65 @@ export const Slider = ({ slides }) => {
   };
 
   const slider = useRef();
-  const otherRef = useRef({
-    hasMousePress: false,
+  const sliderRef = useRef({
+    hasMousePressed: false,
     startXPosition: 0,
     transformAmount: 0,
     velocity: 0,
     requestAnimationId: 0,
   });
   const mouseDown = (event) => {
-    otherRef.current.hasMousePress = true;
-    otherRef.current.startXPosition =
-      event.pageX - otherRef.current.transformAmount;
+    sliderRef.current.hasMousePressed = true;
+    sliderRef.current.startXPosition =
+      event.pageX - sliderRef.current.transformAmount;
     cancelMomentumTracking();
   };
   const mouseLeave = () => {
-    otherRef.current.hasMousePress = false;
+    sliderRef.current.hasMousePressed = false;
   };
   const mouseUp = () => {
-    otherRef.current.hasMousePress = false;
+    sliderRef.current.hasMousePressed = false;
     beginMomentumTracking();
   };
 
   const mouseMove = (event) => {
-    if (!otherRef.current.hasMousePress) return;
+    if (!sliderRef.current.hasMousePressed) return;
     const { pageX } = event;
-    const distance = pageX - otherRef.current.startXPosition;
+    const distance = pageX - sliderRef.current.startXPosition;
     const clampedDistance = clamp(
       distance,
       -slider.current.scrollWidth + slider.current.clientWidth,
       0
     );
-    otherRef.current.velocity =
-      otherRef.current.transformAmount - clampedDistance;
-    otherRef.current.transformAmount = clampedDistance;
+    sliderRef.current.velocity =
+      sliderRef.current.transformAmount - clampedDistance;
+    sliderRef.current.transformAmount = clampedDistance;
     slider.current.style.transform = `translate3d(${clampedDistance}px, 0px, 0px)`;
   };
 
   const beginMomentumTracking = () => {
     cancelMomentumTracking();
-    otherRef.current.requestAnimationId = requestAnimationFrame(momentumLoop);
+    sliderRef.current.requestAnimationId = requestAnimationFrame(momentumLoop);
   };
   const cancelMomentumTracking = () => {
-    cancelAnimationFrame(otherRef.current.requestAnimationId);
+    cancelAnimationFrame(sliderRef.current.requestAnimationId);
   };
   const momentumLoop = () => {
-    const value = otherRef.current.transformAmount - otherRef.current.velocity;
+    const value =
+      sliderRef.current.transformAmount - sliderRef.current.velocity;
     const clampedDistance = clamp(
       value,
       -slider.current.scrollWidth + slider.current.clientWidth,
       0
     );
-    otherRef.current.transformAmount = clampedDistance;
+    sliderRef.current.transformAmount = clampedDistance;
     slider.current.style.transform = `translate3d(${clampedDistance}px, 0px, 0px)`;
-    otherRef.current.velocity *= 0.9;
+    sliderRef.current.velocity *= 0.9;
 
-    if (Math.abs(otherRef.current.velocity) > 0.1) {
-      otherRef.current.requestAnimationId = requestAnimationFrame(momentumLoop);
+    if (Math.abs(sliderRef.current.velocity) > 0.1) {
+      sliderRef.current.requestAnimationId = requestAnimationFrame(
+        momentumLoop
+      );
     }
   };
 
