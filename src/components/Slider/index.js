@@ -1,104 +1,49 @@
-import React, { useState, useRef, useEffect } from "react";
-import "./style.css";
-import { Slide } from "../";
-export const Slider = ({ slides }) => {
-  const slidesListJSX = slides.map((url, id) => (
-    <Slide key={url} id={id} url={url} />
-  ));
-  const clamp = (value, lower, upper) => {
-    if (value > upper) return upper;
-    if (value < lower) return lower;
-    return value;
-  };
+import React, {useState, useRef} from 'react';
+import styles from './styles.module.scss';
+import {images} from '../../assets/images';
+import { ImageComponent } from '../ImageComponent';
 
-  const slider = useRef();
-  const sliderRef = useRef({
-    hasMousePressed: false,
-    startXPosition: 0,
-    transformAmount: 0,
-    velocity: 0,
-    requestAnimationId: 0,
-  });
-  const mouseDown = (event) => {
-    sliderRef.current.hasMousePressed = true;
-    sliderRef.current.startXPosition =
-      event.pageX - sliderRef.current.transformAmount;
-    cancelMomentumTracking();
-  };
-  const mouseLeave = () => {
-    sliderRef.current.hasMousePressed = false;
-  };
-  const mouseUp = () => {
-    sliderRef.current.hasMousePressed = false;
-    beginMomentumTracking();
-  };
+export const Slider = () => {
+    const [x, setX] = useState(0);
+    const [activeSlide, setActiveSlide] = useState(1);
+    // const firstSlide = images[0];
+    // const secondSlide = images[1];
+    // const lastSlide = images[images.length - 1];
+    // const [state,setState] = useState({
+    //     _slides: [lastSlide, firstSlide, secondSlide]
+    // });
+    
+   
 
-  const mouseMove = (event) => {
-    if (!sliderRef.current.hasMousePressed) return;
-    const { pageX } = event;
-    const distance = pageX - sliderRef.current.startXPosition;
-    const clampedDistance = clamp(
-      distance,
-      -slider.current.scrollWidth + slider.current.clientWidth,
-      0
-    );
-    sliderRef.current.velocity =
-      sliderRef.current.transformAmount - clampedDistance;
-    sliderRef.current.transformAmount = clampedDistance;
-    slider.current.style.transform = `translate3d(${clampedDistance}px, 0px, 0px)`;
-  };
-
-  const beginMomentumTracking = () => {
-    cancelMomentumTracking();
-    sliderRef.current.requestAnimationId = requestAnimationFrame(momentumLoop);
-  };
-  const cancelMomentumTracking = () => {
-    cancelAnimationFrame(sliderRef.current.requestAnimationId);
-  };
-  const momentumLoop = () => {
-    const value =
-      sliderRef.current.transformAmount - sliderRef.current.velocity;
-    const clampedDistance = clamp(
-      value,
-      -slider.current.scrollWidth + slider.current.clientWidth,
-      0
-    );
-    sliderRef.current.transformAmount = clampedDistance;
-    slider.current.style.transform = `translate3d(${clampedDistance}px, 0px, 0px)`;
-    sliderRef.current.velocity *= 0.9;
-
-    if (Math.abs(sliderRef.current.velocity) > 0.1) {
-      sliderRef.current.requestAnimationId = requestAnimationFrame(
-        momentumLoop
-      );
-    }
-  };
-
-  useEffect(() => {
-    const sliderCopy = slider.current;
-    sliderCopy.addEventListener("mousedown", mouseDown);
-    sliderCopy.addEventListener("mouseleave", mouseLeave);
-    sliderCopy.addEventListener("mouseup", mouseUp);
-    sliderCopy.addEventListener("mousemove", mouseMove);
-
-    return () => {
-      sliderCopy.removeEventListener("mousedown", mouseDown);
-      sliderCopy.removeEventListener("mouseleave", mouseLeave);
-      sliderCopy.removeEventListener("mouseup", mouseUp);
-      sliderCopy.removeEventListener("mousemove", mouseMove);
+    const showPrevSlide = () => {
+        setActiveSlide(activeSlide - 1);
+        console.log(activeSlide);
+        if(x === 0  ? setX(-100 * (slides.length - 1)) : setX(x + 100));
     };
-  }, []);
 
-  return (
-    <>
-      <div className="main">
-        <h1>Image slider</h1>
-        <div className="cascade">
-          <div className="container" ref={slider}>
-            {slidesListJSX}
-          </div>
+    const showNextSlide = () => {
+        setX(x - 100);
+        setActiveSlide(activeSlide + 1);
+        console.log(activeSlide);
+        if(x === -100 * (slides.length - 1) ? setX(0) : setX(x - 100));
+    };
+
+     const slides = images.map((content, id) => {
+        return (
+            <div className={styles.slide} key={id}
+             onTransitionEnd={() => console.log(`fired!`)}
+             style={{transform:`translate3d(${x}%, 0, 0)`}}
+             >
+                <ImageComponent src={content} activeSlide={activeSlide}></ImageComponent>
+            </div>
+        );
+    });
+
+    return (
+        <div className={styles.slider}>
+            {slides}
+            <button id={styles.prevBtn} onClick={showPrevSlide}>Previous</button>
+            <button id={styles.nextBtn} onClick={showNextSlide}>Next</button>
         </div>
-      </div>
-    </>
-  );
+    );
 };

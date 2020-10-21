@@ -1,7 +1,7 @@
 {
   "name": "image_slider_react",
   "version": "1.0.0",
-  "description": "Home Task for Scandiweb",
+  "description": "Home Task for Scandiweb Latvia",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
@@ -31,6 +31,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.35",
+    "@emotion/styled": "^10.0.27",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

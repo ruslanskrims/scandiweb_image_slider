@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Slider } from "./src/components";
-import { images } from "./src/images";
-ReactDOM.render(<Slider slides={images} />, document.getElementById("app"));
+import { Cascade } from "./src/views/Cascade";
+
+ReactDOM.render(
+<Cascade />, document.getElementById("app")
+);
