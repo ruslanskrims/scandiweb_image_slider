@@ -5,7 +5,7 @@ const cssnano = require("cssnano");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./index.js",
+  entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js",

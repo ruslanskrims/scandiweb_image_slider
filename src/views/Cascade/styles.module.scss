@@ -6,3 +6,17 @@
   flex-direction: column;
   background-color: aqua;
 }
+.slide__container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+}
+.slide_content {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+}

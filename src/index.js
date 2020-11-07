@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Cascade } from "./src/views/Cascade";
+import { Cascade } from "./views/Cascade";
 
 ReactDOM.render(
 <Cascade />, document.getElementById("app")

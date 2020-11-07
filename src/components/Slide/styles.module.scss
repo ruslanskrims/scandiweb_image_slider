@@ -1,0 +1,24 @@
+.slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 18px;
+  border: 2px solid red;
+  img {
+    min-width: 100%;
+    background-size: cover;
+    max-height: 100%;
+  }
+  div,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    padding: 50px;
+  }
+}

@@ -1,49 +1,67 @@
-import React, {useState, useRef} from 'react';
+import React, {Children, useState, useMemo, useRef} from 'react';
+import { Slide } from '../Slide';
 import styles from './styles.module.scss';
-import {images} from '../../assets/images';
-import { ImageComponent } from '../ImageComponent';
 
-export const Slider = () => {
-    const [x, setX] = useState(0);
+export const Slider = ({children, width, height}) => {
+    //changed the architecrute of an app. I have decided set left:0 property for the first
+    //slide in order to make infinite scroll possible
+     const [x, setX] = useState(0);
+     const [trans, setTrans] = useState(0.5);
+     const [r, setR] = useState(0);
     const [activeSlide, setActiveSlide] = useState(1);
-    // const firstSlide = images[0];
-    // const secondSlide = images[1];
-    // const lastSlide = images[images.length - 1];
-    // const [state,setState] = useState({
-    //     _slides: [lastSlide, firstSlide, secondSlide]
-    // });
-    
-   
+  
+    const styles1 = {
+            // some styles based on props 
+            overlay: {
+                width: width,
+                height: height,
+            },
+        };
 
-    const showPrevSlide = () => {
+     const showPrevSlide = () => {
+        setX(x + 600);
         setActiveSlide(activeSlide - 1);
-        console.log(activeSlide);
-        if(x === 0  ? setX(-100 * (slides.length - 1)) : setX(x + 100));
+        setTrans(0.5);
+        if(activeSlide === 1){
+            setX(-(children.length - 1)  * 600);
+            setActiveSlide(children.length);
+            setTrans(0);
+        }
+        console.log(children.length);
+        //  if(x === 0  ? setX(-100 * (slides.length - 1)) : setX(x + 100));
     };
 
     const showNextSlide = () => {
-        setX(x - 100);
+        setX(x - 600);
         setActiveSlide(activeSlide + 1);
-        console.log(activeSlide);
-        if(x === -100 * (slides.length - 1) ? setX(0) : setX(x - 100));
+        setTrans(0.5);
+        if(activeSlide > children.length - 1){
+            setX(0);
+            setActiveSlide(1);
+            setTrans(0);
+        }
+        //  if(x === -100 * (slides.length - 1) ? setX(0) : setX(x - 100));
     };
 
-     const slides = images.map((content, id) => {
+     const slides = Children.map(children, (child, i) => {
+         console.log(i);
         return (
-            <div className={styles.slide} key={id}
-             onTransitionEnd={() => console.log(`fired!`)}
-             style={{transform:`translate3d(${x}%, 0, 0)`}}
-             >
-                <ImageComponent src={content} activeSlide={activeSlide}></ImageComponent>
+            <div key={i}>
+                {child}
             </div>
         );
     });
 
+  
+
     return (
-        <div className={styles.slider}>
+    <div className={styles.slider} style={styles1.overlay}>
+    <div className={styles.slider_wrapper} style={{left: `${x}px`, transition: `${trans}s`}} 
+    >
             {slides}
-            <button id={styles.prevBtn} onClick={showPrevSlide}>Previous</button>
-            <button id={styles.nextBtn} onClick={showNextSlide}>Next</button>
         </div>
+        <button id={styles.prevBtn} onClick={showPrevSlide}>Previous</button>
+        <button id={styles.nextBtn} onClick={showNextSlide}>Next</button>
+     </div>
     );
 };
