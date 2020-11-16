@@ -9,11 +9,11 @@ The list of requirements that were done:
 
 ## Quick instruction:
 
-Installation:
+-- Installation:
 npm install
 
-Run the programm:
+-- Run the programm:
 npm start
 
-Move to production:
+-- Move to production:
 npm run build
