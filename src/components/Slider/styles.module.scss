@@ -1,48 +1,108 @@
 .slider_wrapper {
+  display: flex;
   position: absolute;
   width: 100%;
   height: 100%;
-  display: flex;
+  .slide {
+    min-width: 100%;
+    min-height: 300px;
+  }
 }
 .slider {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  left: 0;
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
-  %btn-styles {
+  #prevBtn {
+    left: 25px;
+    display: flex;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    width: 5%;
-    height: 100%;
-    background: none;
+    height: 50px;
+    width: 50px;
+    justify-content: center;
+    background: #fff;
+    opacity: 1;
+    border-radius: 50%;
     cursor: pointer;
-  }
-  #prevBtn {
-    left: 0;
-    @extend %btn-styles;
+    align-items: center;
+    transition: transform ease-in 0.1s;
   }
   #nextBtn {
-    right: 0;
-    @extend %btn-styles;
+    display: flex;
+    position: absolute;
+    top: 50%;
+    height: 50px;
+    width: 50px;
+    justify-content: center;
+    background: #fff;
+    opacity: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    transition: transform ease-in 0.1s;
+    right: 25px;
   }
 }
-.slide {
+.slider__dots {
   position: absolute;
-  left: 100px;
-  top: 0;
-  border: 2px solid black;
-  box-sizing: border-box;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  img {
-    min-width: 100%;
-    background-size: cover;
-    max-height: 100%;
+}
+.slider__dots > div {
+  width: 20px;
+  height: 20px;
+  background-color: #fdfdfd;
+  border-radius: 50%;
+  margin: 3px 2px;
+  cursor: pointer;
+}
+
+.slider__dot__active {
+  background-color: #49c3f3 !important;
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  .slider {
+    height: 40vh !important;
+    #prevBtn,
+    #nextBtn {
+      width: 20px;
+      height: 20px;
+      background: none;
+    }
+  }
+  .slider__dots > div {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  .slider {
+    height: 60vh;
+    width: 80vw;
+  }
+}
+
+@media (min-width: 768px) {
+  .slider {
+    height: 70vh;
+    width: 70vw;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+  .slider {
+    height: 500px;
+    width: 800px;
   }
 }
