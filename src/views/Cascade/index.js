@@ -18,7 +18,7 @@ export const Cascade = () => {
             <Slide  >
                 <img src={`${images[2]}`}></img>
             </Slide>
-            <Slide color="red">
+            <Slide color="turquoise">
                 <h2>Slider For the Scandiweb</h2>
             </Slide>
             <Slide >
@@ -26,14 +26,12 @@ export const Cascade = () => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci reiciendis placeat dicta velit doloribus. Sequi suscipit laboriosam adipisci hic nobis?
                 </p>
             </Slide>
-            <Slide >
-                <div>
-               PRELAST SLIDE
-                </div>
+            <Slide>
+                <h2>Another slide</h2>
             </Slide>
             <Slide >
                 <div>
-                LAST SLIDE
+                One more slide...
                 </div>
             </Slide>
             <Slide >
