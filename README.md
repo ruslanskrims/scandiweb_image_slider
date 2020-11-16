@@ -1,3 +1,7 @@
+# Scandiweb project - Slider carousel
+
+## Quick instruction:
+
 Installation:
 npm install
 
