@@ -44,7 +44,7 @@ export const Slider = ({children}) => {
     });
 
     const dots = children && children.map((__, index) => (
-        <div onClick={() => getSlideByDot(index)} key={index} className={index === activeSlide ? styles.slider__dot__active : ""}></div>
+        <div onClick={() => getSlideByDot(index)} key={index} className={index === activeSlide ? styles.slider_dot_active : ""}></div>
     ));
 
     const handleTouchStart = (e) => {
@@ -93,7 +93,7 @@ return (
         >
             {slides}
         </div>
-        <div className={styles.slider__dots}>
+        <div className={styles.slider_dots}>
             {dots}
         </div>
         <div id={styles.prevBtn} onClick={showPrevSlide}>

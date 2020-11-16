@@ -48,14 +48,14 @@
     right: 25px;
   }
 }
-.slider__dots {
+.slider_dots {
   position: absolute;
-  bottom: 5px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
 }
-.slider__dots > div {
+.slider_dots > div {
   width: 20px;
   height: 20px;
   background-color: #fdfdfd;
@@ -64,7 +64,7 @@
   cursor: pointer;
 }
 
-.slider__dot__active {
+.slider_dot_active {
   background-color: #49c3f3 !important;
   border: 1px solid #fff;
 }
@@ -80,9 +80,9 @@
       background: none;
     }
   }
-  .slider__dots > div {
-    width: 15px;
-    height: 15px;
+  .slider_dots > div {
+    width: 10px;
+    height: 10px;
   }
 }
 
