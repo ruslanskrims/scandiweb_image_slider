@@ -20,3 +20,6 @@ npm start
 
 - Move to production:
 npm run build
+
+Link to the project: 
+https://ruskrim.github.io/scandiweb_slider_representation/
