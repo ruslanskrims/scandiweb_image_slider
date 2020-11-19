@@ -7,7 +7,7 @@ export const Cascade = () => {
     
     return (
     <div className={styles.cascade}>
-        <h1>Image Slider for Scandiweb</h1>
+        <h1>Slider Carousel for Scandiweb</h1>
         <Slider>
             <Slide>
                 <img src={`${images[0]}`}></img>
@@ -41,7 +41,7 @@ export const Cascade = () => {
             </Slide>
             <Slide >
                 <div>
-               PRELAST SLIDE
+               PRE-LAST SLIDE
                 </div>
             </Slide>
             <Slide >
