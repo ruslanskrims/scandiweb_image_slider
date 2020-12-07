@@ -3,10 +3,6 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  .slide {
-    min-width: 100%;
-    min-height: 300px;
-  }
 }
 .slider {
   cursor: pointer;
@@ -15,9 +11,10 @@
   left: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   overflow: hidden;
-  #prevBtn {
+  .prevBtn {
     left: 25px;
     display: flex;
     position: absolute;
@@ -32,7 +29,7 @@
     align-items: center;
     transition: transform ease-in 0.1s;
   }
-  #nextBtn {
+  .nextBtn {
     display: flex;
     position: absolute;
     top: 50%;
@@ -69,15 +66,12 @@
   border: 1px solid #fff;
 }
 
-/* Landscape phones and down */
 @media (max-width: 480px) {
   .slider {
     height: 40vh !important;
-    #prevBtn,
-    #nextBtn {
-      width: 20px;
-      height: 20px;
-      background: none;
+    .prevBtn,
+    .nextBtn {
+      display: none;
     }
   }
   .slider_dots > div {
@@ -86,7 +80,6 @@
   }
 }
 
-/* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
   .slider {
     height: 60vh;
@@ -97,14 +90,13 @@
 @media (min-width: 768px) {
   .slider {
     height: 70vh;
-    width: 70vw;
+    width: 80vw;
   }
 }
 
-/* Large desktop */
 @media (min-width: 1200px) {
   .slider {
-    height: 500px;
-    width: 800px;
+    height: 550px;
+    width: 700px;
   }
 }

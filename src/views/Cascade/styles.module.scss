@@ -5,5 +5,14 @@
   align-items: center;
   text-align: center;
   flex-direction: column;
-  background-color: #00ffff;
+  background-color: #c8f3f3;
+  &__title {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cascade__title {
+    font-size: 20px;
+  }
 }
